@@ -25,7 +25,7 @@ var GThumb = {
       height = parseInt(jQuery(this).attr('height'));
       GThumb.t.push({id:id,width:width,height:height});
 
-      if (jQuery(this).attr('src') == '' && id != GThumb.big_thumb.id) {
+      if (jQuery(this).attr('src') == '') {
         GThumb.addToQueue(id, 1);
       }
     });
