@@ -77,19 +77,22 @@ var GThumb = {
       for(width = this.big_thumb.width; width/best_size.height>=min_ratio; width--) {
         width_count = this.margin;
         height = this.margin;
+        max_height = 0;
         available_width = main_width - (width + this.margin);
         line = 1;
         for (i=1;i<this.t.length;i++) {
 
           width_count += this.t[i].width + this.margin;
+          max_height = Math.max(this.t[i].height, max_height);
 
           if (width_count > available_width) {
             ratio = width_count / available_width;
-            height += Math.round(this.t[i].height / ratio);
+            height += Math.round(max_height / ratio);
             line++;
+            max_height = 0;
             width_count = this.margin;
             if (line > 2) {
-              if (height > best_size.height && width/height > min_ratio && height<=this.big_thumb.height) {
+              if (height >= best_size.height && width/height >= min_ratio && height<=this.big_thumb.height) {
                 best_size = {width:width,height:height}
               }
               break;
@@ -97,7 +100,14 @@ var GThumb = {
           }
         }
         if (line <= 2) {
-          best_size = {width:width,height:this.big_thumb.height};
+          if (max_height == 0 || line == 1) {
+            height = this.big_thumb.height;
+          } else {
+            height += max_height;
+          }
+          if (height >= best_size.height && width/height >= min_ratio && height<=this.big_thumb.height) {
+            best_size = {width:width,height:height}
+          }
         }
       }
 
