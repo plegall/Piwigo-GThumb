@@ -1,0 +1,17 @@
+#thumbnails {
+  padding: 0;
+  width:auto;
+  overflow:hidden;
+}
+
+#thumbnails li {
+  position: relative;
+  overflow:hidden;
+  float: left;
+  display: inline;
+  background: none !important;
+}
+
+#thumbnails li a {
+  position: absolute;
+}
