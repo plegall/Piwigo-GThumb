@@ -72,7 +72,7 @@ var GThumb = {
     if (this.big_thumb != null && this.big_thumb.height < main_width * this.max_first_thumb_width) {
 
       // Compute best size for landscape picture (we choose bigger height)
-      min_ratio = Math.min(1, this.big_thumb.width/this.big_thumb.height);
+      min_ratio = Math.min(1.05, this.big_thumb.width/this.big_thumb.height);
 
       for(width = this.big_thumb.width; width/best_size.height>=min_ratio; width--) {
         width_count = this.margin;
@@ -117,7 +117,7 @@ var GThumb = {
         this.t[0].height = this.big_thumb.height;
       }
       this.t[0].crop = best_size.width;
-      this.resize(first_thumb, this.big_thumb.width, this.big_thumb.height, best_size.width, best_size.height, 'crop');
+      this.resize(first_thumb, this.big_thumb.width, this.big_thumb.height, best_size.width, best_size.height, true);
 
     }
 
@@ -163,7 +163,7 @@ var GThumb = {
             round_rest = new_width - Math.round(new_width);
             new_width = Math.round(new_width);
           }
-          this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].width, thumb_process[j].height, new_width, new_height, this.method);
+          this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].width, thumb_process[j].height, new_width, new_height, false);
 
           width_count += new_width + this.margin;
         }
@@ -176,7 +176,7 @@ var GThumb = {
 
     // Last line does not need to be cropped
     for (j=0;j<thumb_process.length;j++) {
-      this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].width, thumb_process[j].height, thumb_process[j].width, max_height, this.method);
+      this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].width, thumb_process[j].height, thumb_process[j].width, max_height, false);
     }
 
     if (main_width != jQuery(this.selector).width()) {
@@ -184,15 +184,27 @@ var GThumb = {
     }
   },
 
-  resize: function(thumb, width, height, new_width, new_height, method) {
+  resize: function(thumb, width, height, new_width, new_height, is_big) {
 
-    if (method == 'resize') {
-      thumb.css({
-        height: new_height+'px',
-        width: new_width+'px'
-      });
-      height_crop = 0;
+    if (this.method == 'resize') {
+      real_width = Math.min(new_width, width);
+      real_height = Math.min(new_height, height);
       width_crop = 0;
+      height_crop = 0;
+
+      if (is_big) {
+        if (width - new_width > height - new_height) {
+          real_width = Math.round(new_height * width / height);
+          width_crop = Math.round((real_width - new_width)/2);
+        } else {
+          real_height = Math.round(new_width * height / width);
+          height_crop = Math.round((real_height - new_height)/2);
+        }
+      }
+      thumb.css({
+        height: real_height+'px',
+        width: real_width+'px'
+      });
     } else {
       thumb.css({height: '', width: ''});
       height_crop = Math.round((height - new_height)/2);

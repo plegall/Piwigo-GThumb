@@ -49,6 +49,17 @@
 <p><input type="submit" name="submit" value="{'Submit'|@translate}"></p>
 </form>
 
+<fieldset id="cacheinfo">
+<legend>{'Cache Informations'|@translate}</legend>
+<p>
+{$NB_ELEMENTS}, {$ELEMENTS_SIZE}<br>
+<a href="admin.php?page=plugin-GThumb&amp;pwg_token={$PWG_TOKEN}&amp;deletecache=true" onclick="return confirm('{'Are you sure?'|@translate}');">{'Clear the cache'|@translate}</a>
+</p>
+</fieldset>
+
 {html_head}{literal}
-<style type="text/css">#GThumb td { padding-bottom: 12px; }</style>
+<style type="text/css">
+#GThumb td { padding-bottom: 12px; }
+#cacheinfo p { text-align:left; line-height:20px; margin:20px }
+</style>
 {/literal}{/html_head}

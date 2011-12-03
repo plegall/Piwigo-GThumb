@@ -17,10 +17,9 @@
 GThumb.max_height = {$GThumb.height};
 GThumb.margin = {$GThumb.margin};
 GThumb.method = '{$GThumb.method}';
-
+GThumb.small_thumb = {ldelim}id:{$small_thumb.id},src:'{$small_thumb.src}',width:{$small_thumb.width},height:{$small_thumb.height}{rdelim};
 {if isset($big_thumb)}
 GThumb.big_thumb = {ldelim}id:{$big_thumb.id},src:'{$big_thumb.src}',width:{$big_thumb.width},height:{$big_thumb.height}{rdelim};
-GThumb.small_thumb = {ldelim}id:{$small_thumb.id},src:'{$small_thumb.src}',width:{$small_thumb.width},height:{$small_thumb.height}{rdelim};
 {/if}
 
 GThumb.build('#thumbnails');

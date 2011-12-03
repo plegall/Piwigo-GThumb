@@ -130,4 +130,33 @@ function gtdeltree($path)
   }
 }
 
+function gtdirsize($path, &$size=0, &$nb_files=0)
+{
+  if (is_dir($path))
+  {
+    $fh = opendir($path);
+    while ($file = readdir($fh))
+    {
+      if ($file != '.' and $file != '..' and $file != 'index.htm')
+      {
+        $pathfile = $path . '/' . $file;
+        if (is_dir($pathfile))
+        {
+          $data = gtdirsize($pathfile, $size, $nb_files);
+        }
+        else
+        {
+          $size += filesize($pathfile);
+          $nb_files++;
+        }
+      }
+    }
+    closedir($fh);
+  }
+  return array(
+    'size' => $size,
+    'nb_files' => $nb_files,
+  );
+}
+
 ?>

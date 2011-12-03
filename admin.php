@@ -9,6 +9,14 @@ include_once(GTHUMB_PATH.'functions.inc.php');
 include(dirname(__FILE__).'/config_default.inc.php');
 $params = $conf['GThumb'];
 
+// Delete cache
+if (isset($_GET['deletecache']))
+{
+  check_pwg_token();
+  gtdeltree(GTHUMB_CACHE_DIR);
+  redirect('admin.php?page=plugin-GThumb');
+}
+
 // Save configuration
 if (isset($_POST['submit']))
 {
@@ -56,6 +64,21 @@ $template->assign(
     'BIG_THUMB'       => $params['big_thumb'],
     'CACHE_BIG_THUMB' => $params['cache_big_thumb'],
     'METHOD'          => $params['method'],
+  )
+);
+
+// Informations
+$data = gtdirsize(GTHUMB_CACHE_DIR);
+if ($data['size'] > 1024 * 1024)
+  $data['size'] = round($data['size'] / (1024 * 1024), 2).' MB';
+else
+  $data['size'] = round($data['size'] / 1024, 2).' KB';
+
+$template->assign(
+  array(
+    'NB_ELEMENTS' => l10n_dec('%d photo', '%d photos', $data['nb_files']),
+    'ELEMENTS_SIZE' => $data['size'],
+    'PWG_TOKEN' => get_pwg_token(),
   )
 );
 

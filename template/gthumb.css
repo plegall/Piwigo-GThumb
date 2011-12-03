@@ -15,3 +15,7 @@
 #thumbnails li a {
   position: absolute;
 }
+
+.thumbnail, .thumbnail:hover {
+  border: 0 none;
+}
