@@ -7,5 +7,7 @@ $lang['Cache the big thumbnails (recommended)'] = 'Mettre en cache les grosse mi
 $lang['Scale thumbnails'] = 'Redimensionner les miniatures';
 $lang['Cache Informations'] = 'Informations du cache';
 $lang['Clear the cache'] = 'Effacer le cache';
+$lang['%d file'] = '%d fichier';
+$lang['%d files'] = '%d fichiers';
 
 ?>

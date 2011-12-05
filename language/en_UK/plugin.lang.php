@@ -7,5 +7,7 @@ $lang['Cache the big thumbnails (recommended)'] = 'Cache the big thumbnails (rec
 $lang['Scale thumbnails'] = 'Scale thumbnails';
 $lang['Cache Informations'] = 'Cache Informations';
 $lang['Clear the cache'] = 'Clear the cache';
+$lang['%d file'] = '%d file';
+$lang['%d files'] = '%d files';
 
 ?>

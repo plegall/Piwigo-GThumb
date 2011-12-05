@@ -12,7 +12,7 @@ $params = $conf['GThumb'];
 // Delete cache
 if (isset($_GET['deletecache']))
 {
-  check_pwg_token();
+  check_pwg_token();                             
   gtdeltree(GTHUMB_CACHE_DIR);
   redirect('admin.php?page=plugin-GThumb');
 }
@@ -76,7 +76,7 @@ else
 
 $template->assign(
   array(
-    'NB_ELEMENTS' => l10n_dec('%d photo', '%d photos', $data['nb_files']),
+    'NB_ELEMENTS' => l10n_dec('%d file', '%d files', $data['nb_files']),
     'ELEMENTS_SIZE' => $data['size'],
     'PWG_TOKEN' => get_pwg_token(),
   )

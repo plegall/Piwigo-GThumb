@@ -12,7 +12,7 @@ var GThumb = {
   queue: jQuery.manageAjax.create('queued', {
     queue: true,  
     cacheResponse: false,
-    maxRequests: 2,
+    maxRequests: 3,
     preventDoubleRequests: false
   }),
 
@@ -23,7 +23,12 @@ var GThumb = {
       id = parseInt(this.id.substring(2));
       width = parseInt(jQuery(this).attr('width'));
       height = parseInt(jQuery(this).attr('height'));
-      GThumb.t.push({id:id,width:width,height:height});
+      th = {id:id,width:width,height:height,real_width:width,real_height:height};
+      if (height < GThumb.max_height) {
+        th.width = Math.round(GThumb.max_height * width / height);
+        th.height = GThumb.max_height;
+      }
+      GThumb.t.push(th);
 
       if (jQuery(this).attr('src') == '') {
         GThumb.addToQueue(id, 1);
@@ -163,7 +168,7 @@ var GThumb = {
             round_rest = new_width - Math.round(new_width);
             new_width = Math.round(new_width);
           }
-          this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].width, thumb_process[j].height, new_width, new_height, false);
+          this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].real_width, thumb_process[j].real_height, new_width, new_height, false);
 
           width_count += new_width + this.margin;
         }
@@ -176,7 +181,7 @@ var GThumb = {
 
     // Last line does not need to be cropped
     for (j=0;j<thumb_process.length;j++) {
-      this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].width, thumb_process[j].height, thumb_process[j].width, max_height, false);
+      this.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].real_width, thumb_process[j].real_height, thumb_process[j].width, max_height, false);
     }
 
     if (main_width != jQuery(this.selector).width()) {
@@ -186,9 +191,9 @@ var GThumb = {
 
   resize: function(thumb, width, height, new_width, new_height, is_big) {
 
-    if (this.method == 'resize') {
-      real_width = Math.min(new_width, width);
-      real_height = Math.min(new_height, height);
+    if (this.method == 'resize' || height < new_height || width < new_width) {
+      real_width = new_width;
+      real_height = new_height;
       width_crop = 0;
       height_crop = 0;
 
