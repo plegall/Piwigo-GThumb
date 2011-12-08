@@ -24,6 +24,7 @@ GThumb.big_thumb = {ldelim}id:{$big_thumb.id},src:'{$big_thumb.src}',width:{$big
 {/if}
 
 GThumb.build('#thumbnails');
+$(window).bind('RVTS_loaded', function() {ldelim} GThumb.build('#thumbnails'); });
 {/footer_script}
 
 {html_head}

@@ -21,4 +21,13 @@ function plugin_uninstall()
   pwg_query($query);
 }
 
+function plugin_activate($plugin_id, $version)
+{
+  if (in_array($version, array('2.3.a', '2.3.b')))
+  {
+    include_once(PHPWG_PLUGINS_PATH.basename(dirname(__FILE__)).'/functions.inc.php');
+    gtdeltree(PHPWG_ROOT_PATH.PWG_LOCAL_DIR.'GThumb');
+  }
+}
+
 ?>

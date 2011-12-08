@@ -45,7 +45,7 @@ WHERE i.id = '.$params['image_id'].'
     {
       $cache_dir = $data['cache_path'];
     }
-    $file = $cache_dir.'/'.md5($picture['path']).'.'.$picture['tn_ext'];
+    $file = $cache_dir.'/'.md5($picture['path'].(!empty($picture['md5sum']) ? $picture['md5sum'] : '')).'.'.$picture['tn_ext'];
 
     if (!is_dir($cache_dir))
     {

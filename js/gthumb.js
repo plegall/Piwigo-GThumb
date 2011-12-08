@@ -18,8 +18,9 @@ var GThumb = {
 
   build: function (selector) {
 
+    this.t = new Array;
     this.selector = selector;
-    jQuery(selector+' img').each(function() {
+    jQuery(selector+' img.thumbnail').each(function() {
       id = parseInt(this.id.substring(2));
       width = parseInt(jQuery(this).attr('width'));
       height = parseInt(jQuery(this).attr('height'));
