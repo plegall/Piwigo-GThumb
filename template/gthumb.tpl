@@ -9,9 +9,9 @@
 {/foreach}{/strip}
 
 {combine_css path="plugins/GThumb/template/gthumb.css"}
-{combine_script id='jquery.ajaxmanager' path='themes/default/js/plugins/jquery.ajaxmanager.js'}
-{combine_script id='jquery.ba-resize' path='plugins/GThumb/js/jquery.ba-resize.min.js'}
-{combine_script id='gthumb' require='jquery,jquery.ajaxmanager,jquery.ba-resize' path='plugins/GThumb/js/gthumb.js'}
+{combine_script id='jquery.ajaxmanager' path='themes/default/js/plugins/jquery.ajaxmanager.js' load="footer"}
+{combine_script id='jquery.ba-resize' path='plugins/GThumb/js/jquery.ba-resize.min.js' load="footer"}
+{combine_script id='gthumb' require='jquery,jquery.ajaxmanager,jquery.ba-resize' path='plugins/GThumb/js/gthumb.js' load="footer"}
 
 {footer_script require="gthumb"}
 GThumb.max_height = {$GThumb.height};
@@ -23,8 +23,9 @@ GThumb.small_thumb = {ldelim}id:{$small_thumb.id},src:'{$small_thumb.src}',width
 GThumb.big_thumb = {ldelim}id:{$big_thumb.id},src:'{$big_thumb.src}',width:{$big_thumb.width},height:{$big_thumb.height}{rdelim};
 {/if}
 
-GThumb.build('#thumbnails');
-$(window).bind('RVTS_loaded', function() {ldelim} GThumb.build('#thumbnails'); });
+GThumb.build();
+jQuery(window).bind('RVTS_loaded', GThumb.build);
+jQuery('#thumbnails').resize(GThumb.process);
 {/footer_script}
 
 {html_head}

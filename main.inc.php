@@ -127,7 +127,7 @@ function get_gthumb_data($picture, $size='small')
 {
   global $conf;
 
-  if (empty($picture['width']))
+  if (!in_array(get_extension($picture['file']), $conf['picture_ext']))
   {
     $file = get_thumbnail_url($picture);
     list($width, $height) = getimagesize($file);

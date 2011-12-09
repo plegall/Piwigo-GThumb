@@ -1,12 +1,10 @@
 #thumbnails {
-  padding: 0;
-  width:auto;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 #thumbnails li {
   position: relative;
-  overflow:hidden;
+  overflow: hidden;
   float: left;
   display: inline;
   background: none !important;
@@ -17,5 +15,7 @@
 }
 
 .thumbnail, .thumbnail:hover {
-  border: 0 none;
+  border: 0 none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
