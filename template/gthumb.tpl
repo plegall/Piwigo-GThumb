@@ -1,6 +1,6 @@
 {if !empty($thumbnails)}
 {strip}{foreach from=$thumbnails item=thumbnail}
-<li>
+<li class="gthumb">
   <a href="{$thumbnail.URL}">
     <img id="gt{$thumbnail.ID}" class="thumbnail" src="{$thumbnail.TN_SRC}" alt="{$thumbnail.TN_ALT}" title="{$thumbnail.TN_TITLE}"
          width="{$thumbnail.TN_WIDTH}" height="{$thumbnail.TN_HEIGHT}" {if empty($thumbnail.TN_SRC)}style="display:none;"{/if}>
@@ -29,6 +29,6 @@ jQuery('#thumbnails').resize(GThumb.process);
 {/footer_script}
 
 {html_head}
-<style type="text/css">#thumbnails li {ldelim} margin:0 0 {$GThumb.margin}px {$GThumb.margin}px !important; }</style>
+<style type="text/css">#thumbnails .gthumb {ldelim} margin:0 0 {$GThumb.margin}px {$GThumb.margin}px !important; }</style>
 {/html_head}
 {/if}

@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 
-#thumbnails li {
+#thumbnails .gthumb {
   position: relative;
   overflow: hidden;
   float: left;
@@ -10,11 +10,11 @@
   background: none !important;
 }
 
-#thumbnails li a {
+#thumbnails .gthumb a {
   position: absolute;
 }
 
-.thumbnail, .thumbnail:hover {
+.gthumb .thumbnail, .gthumb .thumbnail:hover {
   border: 0 none !important;
   margin: 0 !important;
   padding: 0 !important;

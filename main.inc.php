@@ -17,8 +17,14 @@ define('GTHUMB_CACHE_DIR', PHPWG_ROOT_PATH.PWG_LOCAL_DIR.'GThumb');
 
 $conf['GThumb'] = unserialize($conf['GThumb']);
 
+// RV Thumbnails Scroller
+if (isset($_GET['rvts']))
+{
+  $conf['GThumb']['big_thumb'] = false;
+  add_event_handler('loc_end_index_thumbnails', 'process_GThumb', 50, 2);
+}
+
 add_event_handler('loc_begin_index', 'GThumb_init', 60);
-add_event_handler('loc_end_index_thumbnails', 'process_GThumb', 50, 2);
 add_event_handler('ws_add_methods', 'add_gthumb_thumbnails_method');
 add_event_handler('get_admin_plugin_menu_links', 'GThumb_admin_menu');
 
@@ -27,6 +33,8 @@ function GThumb_init()
   global $conf, $user, $page, $template;
 
   $template->set_prefilter('index', 'GThumb_prefilter');
+
+  add_event_handler('loc_end_index_thumbnails', 'process_GThumb', 50, 2);
 
   $user['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $page['nb_image_page'] = $conf['GThumb']['nb_image_page'];
@@ -42,11 +50,6 @@ function GThumb_init()
 function process_GThumb($tpl_vars, $pictures)
 {
   global $template, $conf;
-
-  if (isset($_GET['rvts']))
-  {
-    $conf['GThumb']['big_thumb'] = false;
-  }
 
   $template->set_filename( 'index_thumbnails', realpath(GTHUMB_PATH.'template/gthumb.tpl'));
   $template->assign('GThumb', $conf['GThumb']);
