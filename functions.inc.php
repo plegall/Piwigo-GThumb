@@ -40,31 +40,8 @@ WHERE i.id = '.$params['image_id'].'
  
   if (empty($data['src']))
   {
-    $cache_dir = GTHUMB_CACHE_DIR.'/';
-    if ($params['size'] == 'small' or $conf['GThumb']['cache_big_thumb'])
-    {
-      $cache_dir = $data['cache_path'];
-    }
-    $file = $cache_dir.'/'.md5($picture['path'].(!empty($picture['md5sum']) ? $picture['md5sum'] : '')).'.'.$picture['tn_ext'];
-
-    if (!is_dir($cache_dir))
-    {
-      mkgetdir($cache_dir, MKGETDIR_DEFAULT&~MKGETDIR_DIE_ON_ERROR);
-      if (!is_writable($cache_dir))
-      {
-        die("Give write access (chmod 777) to $cache_dir directory at the root of your Piwigo installation");
-      }
-    }
-
-    $filepath = $picture['path'];
-    if ($data['use_high'])
-    {
-      include_once(PHPWG_ROOT_PATH.'admin/include/functions_upload.inc.php');
-      $filepath = file_path_for_type($filepath, 'high');
-    }
-    $img = new pwg_image($filepath);
-    $result = $img->pwg_resize($file, $data['width'], $data['height'], $conf['upload_form_thumb_quality'], false, true, ($params['size'] == 'big'), false);
-    $img->destroy();
+    $result = make_gthumb_image($picture, $data);
+    $file = $result['destination'];
   }
   else
   {
@@ -103,6 +80,39 @@ WHERE i.id = '.$params['image_id'].'
     'width' => $result['width'],
     'height' => $result['height'],
   );
+}
+
+function make_gthumb_image($picture, $data)
+{
+  global $conf;
+
+  $cache_dir = GTHUMB_CACHE_DIR.'/';
+  if ($data['size'] == 'small' or $conf['GThumb']['cache_big_thumb'])
+  {
+    $cache_dir = $data['cache_path'];
+  }
+  $file = $cache_dir.md5($picture['path'].(!empty($picture['md5sum']) ? $picture['md5sum'] : '')).'.'.$picture['tn_ext'];
+
+  if (!is_dir($cache_dir))
+  {
+    mkgetdir($cache_dir, MKGETDIR_DEFAULT&~MKGETDIR_DIE_ON_ERROR);
+    if (!is_writable($cache_dir))
+    {
+      die("Give write access (chmod 777) to $cache_dir directory at the root of your Piwigo installation");
+    }
+  }
+
+  $filepath = $picture['path'];
+  if ($data['use_high'])
+  {
+    include_once(PHPWG_ROOT_PATH.'admin/include/functions_upload.inc.php');
+    $filepath = file_path_for_type($filepath, 'high');
+  }
+  $img = new pwg_image($filepath);
+  $result = $img->pwg_resize($file, $data['width'], $data['height'], $conf['upload_form_thumb_quality'], false, true, ($data['size'] == 'big'), false);
+  $img->destroy();
+
+  return $result;
 }
 
 function gtdeltree($path)

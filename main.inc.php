@@ -76,9 +76,13 @@ function process_GThumb($tpl_vars, $pictures)
       'width' => $ft['TN_WIDTH'],
       'height' => $ft['TN_HEIGHT'],
     );
+
     if (empty($small_thumb['src']))
     {
-      $small_thumb['src'] = 'ws.php?method=pwg.images.getGThumbPlusThumbnail&image_id='.$small_thumb['id'].'&return=true';
+      include_once(GTHUMB_PATH.'functions.inc.php');
+      $data = get_gthumb_data($pictures[0]);
+      $result = make_gthumb_image($pictures[0], $data);
+      $small_thumb['src'] = $result['destination'];
     }
 
     // Big thumb data
@@ -90,9 +94,18 @@ function process_GThumb($tpl_vars, $pictures)
       'width' => $data['width'],
       'height' => $data['height'],
     );
-    if (empty($data['src']))
+    if (empty($big_thumb['src']))
     {
-      $big_thumb['src'] = 'ws.php?method=pwg.images.getGThumbPlusThumbnail&image_id='.$ft['ID'].'&size=big&return=true';
+      if ($conf['GThumb']['cache_big_thumb'])
+      {
+        include_once(GTHUMB_PATH.'functions.inc.php');
+        $result = make_gthumb_image($pictures[0], $data);
+        $big_thumb['src'] = $result['destination'];
+      }
+      else
+      {
+        $big_thumb['src'] = 'ws.php?method=pwg.images.getGThumbPlusThumbnail&image_id='.$ft['ID'].'&size=big&return=true';
+      }
     }
 
     $template->assign(
@@ -176,6 +189,7 @@ function get_gthumb_data($picture, $size='small')
   $result['src'] = '';
   $result['use_high'] = $use_high;
   $result['cache_path'] = GTHUMB_CACHE_DIR.'/'.$new_height.'/';
+  $result['size'] = $size;
 
   return $result;
 }
