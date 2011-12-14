@@ -79,6 +79,7 @@ WHERE i.id = '.$params['image_id'].'
     'src' => $file,
     'width' => $result['width'],
     'height' => $result['height'],
+    'filesize' => filesize($file),
   );
 }
 

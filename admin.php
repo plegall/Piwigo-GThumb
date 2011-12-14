@@ -2,7 +2,7 @@
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
-global $template, $conf;
+global $template, $conf, $page;
 
 load_language('plugin.lang', GTHUMB_PATH);
 include_once(GTHUMB_PATH.'functions.inc.php');
@@ -15,6 +15,33 @@ if (isset($_GET['deletecache']))
   check_pwg_token();                             
   gtdeltree(GTHUMB_CACHE_DIR);
   redirect('admin.php?page=plugin-GThumb');
+}
+
+// Generate cache
+if (isset($_GET['generatecache']))
+{
+  if ($_GET['generatecache'] == 'complete')
+  {
+    array_push($page['infos'], l10n('Cache have been generated'));
+  }
+  else
+  {
+    $query = 'SELECT id, path, md5sum, tn_ext FROM '.IMAGES_TABLE.';';
+    $result = pwg_query($query);
+    $cache_dir = GTHUMB_CACHE_DIR.'/'.$conf['GThumb']['height'].'/';
+    $missing = array();
+
+    while ($row = pwg_db_fetch_assoc($result))
+    {
+      if (!is_file($cache_dir.md5($row['path'].(!empty($row['md5sum']) ? $row['md5sum'] : '')).'.'.$row['tn_ext'])
+        and in_array(get_extension($row['path']), $conf['picture_ext']))
+      {
+        array_push($missing, $row['id']);
+      }
+    }
+    echo json_encode($missing);
+    exit();
+  }
 }
 
 // Save configuration
@@ -69,15 +96,11 @@ $template->assign(
 
 // Informations
 $data = gtdirsize(GTHUMB_CACHE_DIR);
-if ($data['size'] > 1024 * 1024)
-  $data['size'] = round($data['size'] / (1024 * 1024), 2).' MB';
-else
-  $data['size'] = round($data['size'] / 1024, 2).' KB';
 
 $template->assign(
   array(
-    'NB_ELEMENTS' => l10n_dec('%d file', '%d files', $data['nb_files']),
-    'ELEMENTS_SIZE' => $data['size'],
+    'NB_FILES' => $data['nb_files'],
+    'CACHE_SIZE' => $data['size'],
     'PWG_TOKEN' => get_pwg_token(),
   )
 );

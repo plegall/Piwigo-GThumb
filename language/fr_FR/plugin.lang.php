@@ -6,8 +6,10 @@ $lang['Double the size of the first thumbnail'] = 'Doubler la taille de la premi
 $lang['Cache the big thumbnails (recommended)'] = 'Mettre en cache les grosse miniatures (recommandé)';
 $lang['Scale thumbnails'] = 'Redimensionner les miniatures';
 $lang['Cache Informations'] = 'Informations du cache';
-$lang['Clear the cache'] = 'Effacer le cache';
+$lang['Purge thumbnails cache'] = 'Vider le cache';
 $lang['%d file'] = '%d fichier';
 $lang['%d files'] = '%d fichiers';
+$lang['Cache have been generated'] = 'Le cache a été généré';
+$lang['Pre-cache thumbnails'] = 'Mettre en cache les miniatures';
 
 ?>

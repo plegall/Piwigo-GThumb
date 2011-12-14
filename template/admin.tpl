@@ -51,15 +51,121 @@
 
 <fieldset id="cacheinfo">
 <legend>{'Cache Informations'|@translate}</legend>
-<p>
-{$NB_ELEMENTS}, {$ELEMENTS_SIZE}<br>
-<a href="admin.php?page=plugin-GThumb&amp;pwg_token={$PWG_TOKEN}&amp;deletecache=true" onclick="return confirm('{'Are you sure?'|@translate}');">{'Clear the cache'|@translate}</a>
+<p id="cache_data">&nbsp;</p>
+<p id="GThumbAction">
+  <button onclick="GThumb.deletecache();">{'Purge thumbnails cache'|@translate}</button>
+  <button onclick="GThumb.generatecache();">{'Pre-cache thumbnails'|@translate}</button>
 </p>
+<div id="GThumbProgressbar" style="display:none;">
+  {'Generating cache, please wait...'|@translate}<br>
+  <div id="progressbar"></div>
+</div>
 </fieldset>
 
 {html_head}{literal}
 <style type="text/css">
 #GThumb td { padding-bottom: 12px; }
-#cacheinfo p { text-align:left; line-height:20px; margin:20px }
+#cacheinfo p, #GThumbProgressbar { text-align:left; line-height:20px; margin:20px }
+.ui-progressbar-value { background-image: url(plugins/GThumb/template/pbar-ani.gif); }
 </style>
 {/literal}{/html_head}
+
+{combine_script id='jquery.ui.progressbar' load='footer'}
+{combine_script id='jquery.ajaxmanager' load='footer' path='themes/default/js/plugins/jquery.ajaxmanager.js'}
+
+{footer_script}
+var pwg_token = '{$PWG_TOKEN}';
+var confirm_message = '{'Are you sure?'|@translate}';
+var nb_files_str  = '{'%d file'|@translate}';
+var nb_files_str_plur = '{'%d files'|@translate}';
+var lang_info_zero_plural = {if $lang_info.zero_plural}true{else}false{/if};
+var cache_size = {$CACHE_SIZE};
+var nb_files = {$NB_FILES};
+
+{literal}
+var GThumb = {
+
+  total: 0,
+  done: 0,
+
+  queue: jQuery.manageAjax.create('queued', { 
+    queue: true,  
+    cacheResponse: false,
+    maxRequests: 3
+  }),
+
+  deletecache: function() {
+    if (confirm(confirm_message)) {
+      window.location = 'admin.php?page=plugin-GThumb&deletecache=true&pwg_token='+pwg_token;
+    }
+  },
+
+  generatecache: function() {
+    jQuery("#progressbar").progressbar({value: 0});
+    jQuery.ajax({
+      url: 'admin.php?page=plugin-GThumb&generatecache=request',
+      dataType: 'json',
+      success: function(data) {
+        if (data.length > 0) {
+          jQuery("#GThumbProgressbar, #GThumbAction").toggle();
+          GThumb.total = data.length;
+          for (i=0;i<data.length;i++) {
+            GThumb.queue.add({
+              type: 'GET', 
+              url: 'ws.php', 
+              data: {
+                method: 'pwg.images.getGThumbPlusThumbnail',
+                image_id: data[i],
+                format: 'json'
+              },
+              dataType: 'json',
+              success: function(data) {
+                nb_files++;
+                cache_size += data.result.filesize;
+                updateCacheSizeAndFiles();
+                GThumb.progressbar();
+              },
+              error: GThumb.progressbar
+            });
+          }
+        } else {
+          window.location = 'admin.php?page=plugin-GThumb&generatecache=complete';
+        }
+      },
+      error: function() {
+        alert('An error occured');
+      }
+    });
+    return false;
+  },
+
+  progressbar: function() {
+    jQuery( "#progressbar" ).progressbar({
+      value: Math.round(++GThumb.done * 100 / GThumb.total)
+    });
+    if (GThumb.done == GThumb.total) {
+      window.location = 'admin.php?page=plugin-GThumb&generatecache=complete';
+    }
+  }
+};
+
+function updateCacheSizeAndFiles() {
+  
+  if ( nb_files > 1 || (nb_files == 0 && lang_info_zero_plural)) {
+    nbstr = nb_files_str_plur;
+  } else {
+    nbstr = nb_files_str;
+  }
+
+  ret = nbstr.replace('%d', nb_files) + ', ';
+
+  if (cache_size > 1024 * 1024)
+    ret += Math.round((cache_size / (1024 * 1024))*100)/100 + ' MB';
+  else
+    ret += Math.round((cache_size / 1024)*100)/100 + ' KB';
+
+  jQuery("#cache_data").html(ret);
+}
+
+updateCacheSizeAndFiles();
+{/literal}{/footer_script}
