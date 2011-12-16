@@ -182,7 +182,7 @@ function get_gthumb_data($picture, $size='small')
 
   if ($size == 'big')
   {
-    $width = min($width, round($height * 1.15));
+    $width = min($width, round(max($height, $new_height) * 1.15));
   }
 
   $result = pwg_image::get_resize_dimensions($width, $height, 5000, $new_height);
