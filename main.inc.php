@@ -38,13 +38,6 @@ function GThumb_init()
 
   $user['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $page['nb_image_page'] = $conf['GThumb']['nb_image_page'];
-
-  if (is_dir(GTHUMB_CACHE_DIR) and !is_dir(GTHUMB_CACHE_DIR.'/'.$conf['GThumb']['height']))
-  {
-    // We clean cache dir because configuration has changed
-    include_once(GTHUMB_PATH.'functions.inc.php');
-    gtdeltree(GTHUMB_CACHE_DIR);
-  }
 }
 
 function process_GThumb($tpl_vars, $pictures)

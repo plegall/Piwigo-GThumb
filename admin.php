@@ -69,6 +69,15 @@ if (isset($_POST['submit']))
     array_push($page['errors'], 'Number of photos per page must be an integer.');
   }
 
+  if ($params['height'] != $conf['GThumb']['height'])
+  {
+    gtdeltree(GTHUMB_CACHE_DIR);
+  }
+  elseif ($params['margin'] != $conf['GThumb']['margin'])
+  {
+    gtdeltree(GTHUMB_CACHE_DIR.'/'.($conf['GThumb']['height'] * 2 + $conf['GThumb']['margin']));
+  }
+
   if (empty($page['errors']))
   {
     $query = '

@@ -15,7 +15,7 @@ VALUES ("GThumb" , "'.addslashes(serialize($config_default)).'" , "GThumb plugin
 function plugin_uninstall()
 {
   include_once(dirname(__FILE__).'/functions.inc.php');
-  gtdeltree(GTHUMB_CACHE_DIR);
+  gtdeltree(PHPWG_ROOT_PATH.PWG_LOCAL_DIR.'GThumb');
   
   $query = 'DELETE FROM ' . CONFIG_TABLE . ' WHERE param="GThumb" LIMIT 1;';
   pwg_query($query);
