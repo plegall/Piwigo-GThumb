@@ -53,12 +53,13 @@
 <legend>{'Cache Informations'|@translate}</legend>
 <p id="cache_data">&nbsp;</p>
 <p id="GThumbAction">
-  <button onclick="GThumb.deletecache();">{'Purge thumbnails cache'|@translate}</button>
-  <button onclick="GThumb.generatecache();">{'Pre-cache thumbnails'|@translate}</button>
+  <button onclick="GThumb.deletecache();" title="{'Delete images in GThumb+ cache.'|@translate}">{'Purge thumbnails cache'|@translate}</button>
+  <button onclick="GThumb.generatecache();" title="{'Finds images that have not been cached and creates the cached version.'|@translate}">{'Pre-cache thumbnails'|@translate}</button>
 </p>
 <div id="GThumbProgressbar" style="display:none;">
   {'Generating cache, please wait...'|@translate}<br>
   <div id="progressbar"></div>
+  <p><button onclick="GThumb.abort();">{'Cacncel'|@translate}</button></p>
 </div>
 </fieldset>
 
@@ -101,14 +102,17 @@ var GThumb = {
   },
 
   generatecache: function() {
-    jQuery("#progressbar").progressbar({value: 0});
+    GThumb.total = nb_files;
+    GThumb.done = nb_files;
+    jQuery("#progressbar").progressbar({value: 1});
     jQuery.ajax({
       url: 'admin.php?page=plugin-GThumb&generatecache=request',
       dataType: 'json',
       success: function(data) {
         if (data.length > 0) {
           jQuery("#GThumbProgressbar, #GThumbAction").toggle();
-          GThumb.total = data.length;
+          GThumb.total = data.length + GThumb.done;
+          jQuery("#progressbar").progressbar({value: Math.ceil(GThumb.done * 100 / GThumb.total)});
           for (i=0;i<data.length;i++) {
             GThumb.queue.add({
               type: 'GET', 
@@ -141,11 +145,17 @@ var GThumb = {
 
   progressbar: function() {
     jQuery( "#progressbar" ).progressbar({
-      value: Math.round(++GThumb.done * 100 / GThumb.total)
+      value: Math.ceil(++GThumb.done * 100 / GThumb.total)
     });
     if (GThumb.done == GThumb.total) {
       window.location = 'admin.php?page=plugin-GThumb&generatecache=complete';
     }
+  },
+
+  abort: function() {
+    GThumb.queue.clear();
+    GThumb.queue.abort();
+    jQuery("#GThumbProgressbar, #GThumbAction").toggle();
   }
 };
 
@@ -168,4 +178,6 @@ function updateCacheSizeAndFiles() {
 }
 
 updateCacheSizeAndFiles();
+
+jQuery('#GThumbAction button').tipTip({'delay' : 0, 'fadeIn' : 200, 'fadeOut' : 200});
 {/literal}{/footer_script}
