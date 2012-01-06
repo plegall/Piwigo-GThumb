@@ -163,14 +163,14 @@ function get_gthumb_data($picture, $size='small')
     );
   }
 
-  if ( !empty( $picture['tn_ext'] ) )
+  if ( !empty($picture['tn_ext']) )
   {
     $file = substr_replace(get_filename_wo_extension($picture['path']), '/GThumb/',strrpos($picture['path'],'/'),1).'.'.$picture['tn_ext'];
     if (file_exists($file))
     {
       list($width, $height) = getimagesize($file);
 
-      $result = array(
+      return array(
         'src' => embellish_url(get_root_url().$file),
         'width' => $width,
         'height' => $height,
