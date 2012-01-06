@@ -93,11 +93,11 @@ function process_GThumb($tpl_vars, $pictures)
       {
         include_once(GTHUMB_PATH.'functions.inc.php');
         $result = make_gthumb_image($pictures[0], $data);
-        $big_thumb['src'] = $result['destination'];
+        $big_thumb['src'] = embellish_url(get_root_url().$result['destination']);
       }
       else
       {
-        $big_thumb['src'] = 'ws.php?method=pwg.images.getGThumbPlusThumbnail&image_id='.$ft['ID'].'&size=big&return=true';
+        $big_thumb['src'] = get_root_url().'ws.php?method=pwg.images.getGThumbPlusThumbnail&image_id='.$ft['ID'].'&size=big&return=true';
       }
     }
 
@@ -136,13 +136,14 @@ function get_gthumb_data($picture, $size='small')
 {
   global $conf;
 
-  if (!in_array(get_extension($picture['path']), $conf['picture_ext']))
+  $picture_ext = array('jpg', 'jpeg', 'png', 'gif');
+
+  if (!in_array(strtolower(get_extension($picture['path'])), $picture_ext))
   {
-    $file = get_thumbnail_url($picture);
-    list($width, $height) = getimagesize($file);
+    list($width, $height) = getimagesize(get_thumbnail_path($picture));
 
     return array(
-      'src' => $file,
+      'src' => get_thumbnail_url($picture),
       'width' => $width,
       'height' => $height,
     );
@@ -156,7 +157,7 @@ function get_gthumb_data($picture, $size='small')
     list($width, $height) = getimagesize($file);
 
     return array(
-      'src' => $file,
+      'src' => embellish_url(get_root_url().$file),
       'width' => $width,
       'height' => $height,
     );

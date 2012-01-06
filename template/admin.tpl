@@ -59,7 +59,7 @@
 <div id="GThumbProgressbar" style="display:none;">
   {'Generating cache, please wait...'|@translate}<br>
   <div id="progressbar"></div>
-  <p><button onclick="GThumb.abort();">{'Cacncel'|@translate}</button></p>
+  <p><button onclick="GThumb.abort();">{'Cancel'|@translate}</button></p>
 </div>
 </fieldset>
 

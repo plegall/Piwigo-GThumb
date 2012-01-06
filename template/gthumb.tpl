@@ -14,6 +14,7 @@
 {combine_script id='gthumb' require='jquery,jquery.ajaxmanager,jquery.ba-resize' path='plugins/GThumb/js/gthumb.js' load="footer"}
 
 {footer_script require="gthumb"}
+GThumb.root = '{$ROOT_URL}';
 GThumb.max_height = {$GThumb.height};
 GThumb.margin = {$GThumb.margin};
 GThumb.method = '{$GThumb.method}';

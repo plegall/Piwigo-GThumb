@@ -1,5 +1,6 @@
 var GThumb = {
 
+  root: './',
   max_height: 200,
   margin: 10,
   max_first_thumb_width: 0.7,
@@ -43,7 +44,7 @@ var GThumb = {
 
     GThumb.queue.add({
       type: 'GET', 
-      url: 'ws.php', 
+      url: GThumb.root+'ws.php', 
       data: {
         method: 'pwg.images.getGThumbPlusThumbnail',
         image_id: id,
@@ -52,7 +53,7 @@ var GThumb = {
       dataType: 'json',
       success: function(data) {
         if (data.stat == 'ok') {
-          jQuery('#gt'+data.result.id).prop('src', data.result.src).show();
+          jQuery('#gt'+data.result.id).prop('src', GThumb.root+data.result.src).show();
         } else if (loop < 4) {
           GThumb.addToQueue(id, ++loop);
         }
