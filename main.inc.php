@@ -165,7 +165,7 @@ function get_gthumb_data($picture, $size='small')
 
   if ( !empty($picture['tn_ext']) )
   {
-    $file = substr_replace(get_filename_wo_extension($picture['path']), '/GThumb/',strrpos($picture['path'],'/'),1).'.'.$picture['tn_ext'];
+    $file = substr_replace(get_filename_wo_extension($picture['path']), '/thumbnail/GT-',strrpos($picture['path'],'/'),1).'.'.$picture['tn_ext'];
     if (file_exists($file))
     {
       list($width, $height) = getimagesize($file);
