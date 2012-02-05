@@ -1,0 +1,1 @@
+Zobrazí více náhledů obrázků jako čtverce.
