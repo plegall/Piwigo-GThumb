@@ -57,6 +57,11 @@
 <fieldset id="generate_cache">
 <legend>{'Pre-cache thumbnails'|@translate}</legend>
 <p>
+	<input id="startLink" value="{'Start'|@translate}" onclick="start()" type="button">
+	<input id="pauseLink" value="{'Pause'|@translate}" onclick="pause()" type="button" disabled="disbled">
+	<input id="stopLink" value="{'Stop'|@translate}" onclick="stop()" type="button" disabled="disbled">
+</p>
+<p>
 <table>
 	<tr>
 		<td>Errors</td>
@@ -72,12 +77,7 @@
 	</tr>
 </table>
 </p>
-<p>
-	<input id="startLink" value="{'Start'|@translate}" onclick="start()" type="button">
-	<input id="pauseLink" value="{'Pause'|@translate}" onclick="pause()" type="button" disabled="disbled">
-	<input id="stopLink" value="{'Stop'|@translate}" onclick="stop()" type="button" disabled="disbled">
-</p>
-<div id="feedbackWrap" style="height:320px; min-height:320px;">
+<div id="feedbackWrap" style="height:{$HEIGHT}px; min-height:{$HEIGHT}px;">
 <img id="feedbackImg">
 </div>
 
@@ -124,7 +124,7 @@ function start() {
 
 	loader.pause(false);
 	updateStats();
-	getUrls('0');
+	getUrls(0);
 }
 
 function pause() {
@@ -137,15 +137,12 @@ function stop() {
 }
 
 function getUrls(page_token) {
-	data = {prev_page: page_token, max_urls: 195, types: []};
+	data = {prev_page: page_token, max_urls: 500, types: []};
 	jQuery.post( '{/literal}{$ROOT_URL}{literal}admin.php?page=plugin-GThumb&getMissingDerivative=',
 		data, wsData, "json").fail( wsError );
 }
 
 function wsData(data) {
-  if (data.urls.length == 0) {
-    jQuery('#generate_cache, input[name="cachebuild"]').hide();
-  }
 	loader.add( data.urls );
 	if (data.next_page) {
 		if (loader.pause() || loader.remaining() > 100) {
