@@ -46,20 +46,42 @@
 </table>
 </fieldset>
 
-<p><input type="submit" name="submit" value="{'Submit'|@translate}"></p>
+<p>
+  <input type="hidden" name="pwg_token" value="{$PWG_TOKEN}">
+  <input type="submit" name="submit" value="{'Submit'|@translate}">
+  <input type="submit" name="cachedelete" value="{'Purge thumbnails cache'|@translate}" title="{'Delete images in GThumb+ cache.'|@translate}" onclick="return confirm('{'Are you sure?'|@translate}');">
+  <input type="button" name="cachebuild" value="{'Pre-cache thumbnails'|@translate}" title="{'Finds images that have not been cached and creates the cached version.'|@translate}" onclick="start()">
+</p>
 </form>
 
-<fieldset id="cacheinfo">
-<legend>{'Cache Informations'|@translate}</legend>
-<p id="cache_data">&nbsp;</p>
-<p id="GThumbAction">
-  <button onclick="GThumb.deletecache();" title="{'Delete images in GThumb+ cache.'|@translate}">{'Purge thumbnails cache'|@translate}</button>
-  <button onclick="GThumb.generatecache();" title="{'Finds images that have not been cached and creates the cached version.'|@translate}">{'Pre-cache thumbnails'|@translate}</button>
+<fieldset id="generate_cache">
+<legend>{'Pre-cache thumbnails'|@translate}</legend>
+<p>
+<table>
+	<tr>
+		<td>Errors</td>
+		<td id="errors">0</td>
+	</tr>
+	<tr>
+		<td>Loaded</td>
+		<td id="loaded">0</td>
+	</tr>
+	<tr>
+		<td>Remaining</td>
+		<td id="remaining">0</td>
+	</tr>
+</table>
 </p>
-<div id="GThumbProgressbar" style="display:none;">
-  {'Generating cache, please wait...'|@translate}<br>
-  <div id="progressbar"></div>
-  <p><button onclick="GThumb.abort();">{'Cancel'|@translate}</button></p>
+<p>
+	<input id="startLink" value="{'Start'|@translate}" onclick="start()" type="button">
+	<input id="pauseLink" value="{'Pause'|@translate}" onclick="pause()" type="button" disabled="disbled">
+	<input id="stopLink" value="{'Stop'|@translate}" onclick="stop()" type="button" disabled="disbled">
+</p>
+<div id="feedbackWrap" style="height:320px; min-height:320px;">
+<img id="feedbackImg">
+</div>
+
+<div id="errorList">
 </div>
 </fieldset>
 
@@ -68,116 +90,112 @@
 #GThumb td { padding-bottom: 12px; }
 #cacheinfo p, #GThumbProgressbar { text-align:left; line-height:20px; margin:20px }
 .ui-progressbar-value { background-image: url(plugins/GThumb/template/pbar-ani.gif); }
+#generate_cache { display: none; }
 </style>
 {/literal}{/html_head}
 
-{combine_script id='jquery.ui.progressbar' load='footer'}
-{combine_script id='jquery.ajaxmanager' load='footer' path='themes/default/js/plugins/jquery.ajaxmanager.js'}
+{combine_script id='iloader' load='footer' path='themes/default/js/image.loader.js'}
 
-{footer_script}
-var pwg_token = '{$PWG_TOKEN}';
-var confirm_message = '{'Are you sure?'|@translate}';
-var nb_files_str  = '{'%d file'|@translate}';
-var nb_files_str_plur = '{'%d files'|@translate}';
-var lang_info_zero_plural = {if $lang_info.zero_plural}true{else}false{/if};
-var cache_size = {$CACHE_SIZE};
-var nb_files = {$NB_FILES};
+{footer_script require='jquery.effects.slide'}{literal}
+jQuery('input[name^="cache"]').tipTip({'delay' : 0, 'fadeIn' : 200, 'fadeOut' : 200});
 
-{literal}
-var GThumb = {
+var loader = new ImageLoader( {onChanged: loaderChanged, maxRequests:1 } )
+	, pending_next_page = null
+	, last_image_show_time = 0
+	, allDoneDfd, urlDfd;
 
-  total: 0,
-  done: 0,
+function start() {
+	allDoneDfd = jQuery.Deferred();
+	urlDfd = jQuery.Deferred();
 
-  queue: jQuery.manageAjax.create('queued', { 
-    queue: true,  
-    cacheResponse: false,
-    maxRequests: 3
-  }),
+	allDoneDfd.always( function() {
+			jQuery("#startLink").attr('disabled', false).css("opacity", 1);
+			jQuery("#pauseLink,#stopLink").attr('disabled', true).css("opacity", 0.5);
+		} );
 
-  deletecache: function() {
-    if (confirm(confirm_message)) {
-      window.location = 'admin.php?page=plugin-GThumb&deletecache=true&pwg_token='+pwg_token;
-    }
-  },
+	urlDfd.always( function() {
+		if (loader.remaining()==0)
+			allDoneDfd.resolve();
+		} );
 
-  generatecache: function() {
-    GThumb.total = nb_files;
-    GThumb.done = nb_files;
-    jQuery("#progressbar").progressbar({value: 1});
-    jQuery.ajax({
-      url: 'admin.php?page=plugin-GThumb&generatecache=request',
-      dataType: 'json',
-      success: function(data) {
-        if (data.length > 0) {
-          jQuery("#GThumbProgressbar, #GThumbAction").toggle();
-          GThumb.total = data.length + GThumb.done;
-          jQuery("#progressbar").progressbar({value: Math.ceil(GThumb.done * 100 / GThumb.total)});
-          for (i=0;i<data.length;i++) {
-            GThumb.queue.add({
-              type: 'GET', 
-              url: 'ws.php', 
-              data: {
-                method: 'pwg.images.getGThumbPlusThumbnail',
-                image_id: data[i],
-                format: 'json'
-              },
-              dataType: 'json',
-              success: function(data) {
-                nb_files++;
-                cache_size += data.result.filesize;
-                updateCacheSizeAndFiles();
-                GThumb.progressbar();
-              },
-              error: GThumb.progressbar
-            });
-          }
-        } else {
-          window.location = 'admin.php?page=plugin-GThumb&generatecache=complete';
-        }
-      },
-      error: function() {
-        alert('An error occured');
-      }
-    });
-    return false;
-  },
+  jQuery('#generate_cache').show();
+	jQuery("#startLink").attr('disabled', true).css("opacity", 0.5);
+	jQuery("#pauseLink,#stopLink").attr('disabled', false).css("opacity", 1);
 
-  progressbar: function() {
-    jQuery( "#progressbar" ).progressbar({
-      value: Math.ceil(++GThumb.done * 100 / GThumb.total)
-    });
-    if (GThumb.done == GThumb.total) {
-      window.location = 'admin.php?page=plugin-GThumb&generatecache=complete';
-    }
-  },
-
-  abort: function() {
-    GThumb.queue.clear();
-    GThumb.queue.abort();
-    jQuery("#GThumbProgressbar, #GThumbAction").toggle();
-  }
-};
-
-function updateCacheSizeAndFiles() {
-  
-  if ( nb_files > 1 || (nb_files == 0 && lang_info_zero_plural)) {
-    nbstr = nb_files_str_plur;
-  } else {
-    nbstr = nb_files_str;
-  }
-
-  ret = nbstr.replace('%d', nb_files) + ', ';
-
-  if (cache_size > 1024 * 1024)
-    ret += Math.round((cache_size / (1024 * 1024))*100)/100 + ' MB';
-  else
-    ret += Math.round((cache_size / 1024)*100)/100 + ' KB';
-
-  jQuery("#cache_data").html(ret);
+	loader.pause(false);
+	updateStats();
+	getUrls('0');
 }
 
-updateCacheSizeAndFiles();
+function pause() {
+	loader.pause( !loader.pause() );
+}
 
-jQuery('#GThumbAction button').tipTip({'delay' : 0, 'fadeIn' : 200, 'fadeOut' : 200});
+function stop() {
+	loader.clear();
+	urlDfd.resolve();
+}
+
+function getUrls(page_token) {
+	data = {prev_page: page_token, max_urls: 195, types: []};
+	jQuery.post( '{/literal}{$ROOT_URL}{literal}admin.php?page=plugin-GThumb&getMissingDerivative=',
+		data, wsData, "json").fail( wsError );
+}
+
+function wsData(data) {
+  if (data.urls.length == 0) {
+    jQuery('#generate_cache, input[name="cachebuild"]').hide();
+  }
+	loader.add( data.urls );
+	if (data.next_page) {
+		if (loader.pause() || loader.remaining() > 100) {
+			pending_next_page = data.next_page;
+		}
+		else {
+			getUrls(data.next_page);
+		}
+	}
+}
+
+function wsError() {
+	urlDfd.reject();
+}
+
+function updateStats() {
+	jQuery("#loaded").text( loader.loaded );
+	jQuery("#errors").text( loader.errors );
+	jQuery("#remaining").text( loader.remaining() );
+}
+
+function loaderChanged(type, img) {
+	updateStats();
+	if (img) {
+		if (type==="load") {
+			var now = jQuery.now();
+			if (now - last_image_show_time > 3000) {
+				last_image_show_time = now;
+				var h=img.height, url=img.src;
+				jQuery("#feedbackWrap").hide("slide", {direction:'down'}, function() {
+					last_image_show_time = jQuery.now();
+					if (h > 300 )
+						jQuery("#feedbackImg").attr("height", 300);
+					else
+						jQuery("#feedbackImg").removeAttr("height");
+					jQuery("#feedbackImg").attr("src", url);
+					jQuery("#feedbackWrap").show("slide", {direction:'up'} );
+					} );
+			}
+		}
+		else {
+			jQuery("#errorList").prepend( '<a href="'+img.src+'">'+img.src+'</a>' + "<br>");
+		}
+	}
+	if (pending_next_page && 100 > loader.remaining() )	{
+		getUrls(pending_next_page);
+		pending_next_page = null;
+	}
+	else if (loader.remaining() == 0 && (urlDfd.isResolved() || urlDfd.isRejected()))	{
+		allDoneDfd.resolve();
+	}
+}
 {/literal}{/footer_script}

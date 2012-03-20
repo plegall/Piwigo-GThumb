@@ -1,6 +1,5 @@
 var GThumb = {
 
-  root: './',
   max_height: 200,
   margin: 10,
   max_first_thumb_width: 0.7,
@@ -9,59 +8,26 @@ var GThumb = {
   method: 'crop',
   t: new Array,
 
-  queue: jQuery.manageAjax.create('queued', {
-    queue: true,  
-    cacheResponse: false,
-    maxRequests: 3,
-    preventDoubleRequests: false
-  }),
-
   build: function () {
 
     GThumb.t = new Array;
-    jQuery('#thumbnails img.thumbnail').each(function() {
-      id = parseInt(this.id.substring(2));
+    jQuery('#thumbnails img.thumbnail').each(function(index) {
       width = parseInt(jQuery(this).attr('width'));
       height = parseInt(jQuery(this).attr('height'));
-      th = {id:id,width:width,height:height,real_width:width,real_height:height};
+      th = {index:index,width:width,height:height,real_width:width,real_height:height};
       if (height < GThumb.max_height) {
         th.width = Math.round(GThumb.max_height * width / height);
         th.height = GThumb.max_height;
       }
       GThumb.t.push(th);
-
-      if (jQuery(this).attr('src') == '') {
-        GThumb.addToQueue(id, 1);
-      }
     });
+
+    first = GThumb.t[0];
+    GThumb.small_thumb = {index:first.index,width:first.real_width,height:first.real_height,src:jQuery('#thumbnails img:first').attr('src')}
 
     jQuery.resize.throttleWindow = false;
     jQuery.resize.delay = 50;
     GThumb.process();
-  },
-
-  addToQueue: function (id, loop) {
-
-    GThumb.queue.add({
-      type: 'GET', 
-      url: GThumb.root+'ws.php', 
-      data: {
-        method: 'pwg.images.getGThumbPlusThumbnail',
-        image_id: id,
-        format: 'json'
-      },
-      dataType: 'json',
-      success: function(data) {
-        if (data.stat == 'ok') {
-          jQuery('#gt'+data.result.id).prop('src', GThumb.root+data.result.src).show();
-        } else if (loop < 4) {
-          GThumb.addToQueue(id, ++loop);
-        }
-      },
-      error: function() {
-        if (loop < 4) GThumb.addToQueue(id, ++loop);
-      }
-    });
   },
 
   process: function() {
@@ -97,7 +63,7 @@ var GThumb = {
             width_count = GThumb.margin;
             if (line > 2) {
               if (height >= best_size.height && width/height >= min_ratio && height<=GThumb.big_thumb.height) {
-                best_size = {width:width,height:height}
+                best_size = {width:width,height:height};
               }
               break;
             }
@@ -152,7 +118,7 @@ var GThumb = {
 
       if (width_count > available_width) {
 
-        last_thumb = GThumb.t[i].id;
+        last_thumb = GThumb.t[i].index;
         ratio = width_count / available_width;
         new_height = Math.round(max_height / ratio);
         round_rest = 0;
@@ -160,14 +126,14 @@ var GThumb = {
 
         for (j=0;j<thumb_process.length;j++) {
 
-          if (thumb_process[j].id == last_thumb) {
+          if (thumb_process[j].index == last_thumb) {
             new_width = available_width - width_count - GThumb.margin;
           } else {
             new_width = (thumb_process[j].width + round_rest) / ratio;
             round_rest = new_width - Math.round(new_width);
             new_width = Math.round(new_width);
           }
-          GThumb.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].real_width, thumb_process[j].real_height, new_width, new_height, false);
+          GThumb.resize(jQuery('#thumbnails img.thumbnail').eq(thumb_process[j].index), thumb_process[j].real_width, thumb_process[j].real_height, new_width, new_height, false);
 
           width_count += new_width + GThumb.margin;
         }
@@ -180,7 +146,7 @@ var GThumb = {
 
     // Last line does not need to be cropped
     for (j=0;j<thumb_process.length;j++) {
-      GThumb.resize(jQuery('#gt'+thumb_process[j].id), thumb_process[j].real_width, thumb_process[j].real_height, thumb_process[j].width, max_height, false);
+      GThumb.resize(jQuery('#thumbnails img.thumbnail').eq(thumb_process[j].index), thumb_process[j].real_width, thumb_process[j].real_height, thumb_process[j].width, max_height, false);
     }
 
     if (main_width != jQuery('#thumbnails').width()) {
