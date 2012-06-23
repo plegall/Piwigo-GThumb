@@ -37,7 +37,7 @@ if (isset($_GET['getMissingDerivative']))
 
   $qlimit = min(5000, ceil(max($image_count/500, $max_urls)));
 
-  $query_model = 'SELECT id, path, representative_ext, width, height
+  $query_model = 'SELECT *
   FROM '.IMAGES_TABLE.'
   WHERE id < start_id
   ORDER BY id DESC
