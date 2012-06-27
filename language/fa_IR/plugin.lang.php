@@ -23,14 +23,14 @@
 $lang['%d file'] = '%d فایل';
 $lang['%d files'] = '%d فایل';
 $lang['Cache Informations'] = 'اطلاعات کش (Cache)';
-$lang['Cache have been generated'] = 'کش (Cache) تولید شده است';
-$lang['Cache the big thumbnails (recommended)'] = 'کش (Cache) کردن عکس ریزه های بزرگ (توصیه می شود)';
-$lang['Delete images in GThumb+ cache.'] = 'پاک کردن کش (Cache) عکس ها در GThumb+.';
+$lang['Cache have been generated'] = 'کش تولید شده است';
+$lang['Cache the big thumbnails (recommended)'] = 'کش کردن عکس ریزه های بزرگ (توصیه می شود)';
+$lang['Delete images in GThumb+ cache.'] = 'پاک کردن کش عکس ها در GThumb+.';
 $lang['Double the size of the first thumbnail'] = 'دو برابر کردن سایز عکس ریزه ی نخست';
-$lang['Finds images that have not been cached and creates the cached version.'] = 'پیدا کردن عکس هایی که کش (Cache) نشده اند و ساخت یک نگارش کش شده از آن ها.';
+$lang['Finds images that have not been cached and creates the cached version.'] = 'پیدا کردن عکس هایی که کش نشده اند و ساخت یک نگارش کش شده از آن ها.';
 $lang['Margin between thumbnails'] = 'فاصله ی بین عکس ریزه ها';
-$lang['Pre-cache thumbnails'] = 'بررسی پیش از کش (Cache) کردن عکس ریزه ها';
-$lang['Purge thumbnails cache'] = 'تخلیه کردن کش (Cache) عکس ریزه ها';
+$lang['Pre-cache thumbnails'] = 'بررسی پیش از کش کردن عکس ریزه ها';
+$lang['Purge thumbnails cache'] = 'تخلیه کردن کش عکس ریزه ها';
 $lang['Scale thumbnails'] = 'بزرگنمایی عکس ریزه ها';
 $lang['Thumbnails max height'] = 'بیشترین بلندای عکس ریزه ها';
 ?>
