@@ -12,6 +12,8 @@ global $conf;
 
 if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
+if (mobile_theme()) return;
+
 define('GTHUMB_PATH' , PHPWG_PLUGINS_PATH . basename(dirname(__FILE__)) . '/');
 
 $conf['GThumb'] = unserialize($conf['GThumb']);
@@ -24,6 +26,7 @@ if (isset($_GET['rvts']))
 }
 
 add_event_handler('loc_begin_index', 'GThumb_init', 60);
+add_event_handler('loc_end_index', 'GThumb_remove_thumb_size');
 add_event_handler('get_admin_plugin_menu_links', 'GThumb_admin_menu');
 
 function GThumb_init()
@@ -73,6 +76,12 @@ function GThumb_admin_menu($menu)
     )
   );
   return $menu;
+}
+
+function GThumb_remove_thumb_size()
+{
+  global $template;
+  $template->clear_assign('image_derivatives');
 }
 
 ?>
