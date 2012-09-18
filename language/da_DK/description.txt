@@ -1,1 +1,1 @@
-Viser thumbnails som kludetæppe.
+Viser miniaturebilleder som et kludetæppe.

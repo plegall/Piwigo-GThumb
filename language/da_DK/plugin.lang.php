@@ -22,15 +22,15 @@
 // +-----------------------------------------------------------------------+
 $lang['%d file'] = '%d fil';
 $lang['%d files'] = '%d filer';
-$lang['Cache Informations'] = 'Cache informationer';
-$lang['Cache have been generated'] = 'Cache er oprettet';
-$lang['Cache the big thumbnails (recommended)'] = 'Cacher store thumbnails(anbefales)';
-$lang['Delete images in GThumb+ cache.'] = 'Sletter billeder i GThumb og cache';
-$lang['Double the size of the first thumbnail'] = 'Sætter første thumbnail til dobbelt størrelse';
-$lang['Finds images that have not been cached and creates the cached version.'] = 'Finder billeder der ikke er blevet cachet og danner en cachet version';
-$lang['Margin between thumbnails'] = 'Margin mellem thumbnails';
-$lang['Pre-cache thumbnails'] = 'Pre-cache thumbnails';
-$lang['Purge thumbnails cache'] = 'Slet cache for thumbnails';
-$lang['Scale thumbnails'] = 'Skaler thumbnails';
-$lang['Thumbnails max height'] = 'Max højde for thumbnails';
+$lang['Cache Informations'] = 'Cacheoplysninger';
+$lang['Cache have been generated'] = 'Cache er dannet';
+$lang['Cache the big thumbnails (recommended)'] = 'Cacher store miniaturebilleder (anbefales)';
+$lang['Delete images in GThumb+ cache.'] = 'Sletter billeder i GThumb+\'s cache';
+$lang['Double the size of the first thumbnail'] = 'Giv første miniturebillede dobbelt størrelse';
+$lang['Finds images that have not been cached and creates the cached version.'] = 'Finder billeder der ikke er blevet cachet og danner en cachet udgave';
+$lang['Margin between thumbnails'] = 'Margin mellem miniaturebilleder';
+$lang['Pre-cache thumbnails'] = 'Præ-cache miniaturebilleder';
+$lang['Purge thumbnails cache'] = 'Slet miniaturebilleders cache';
+$lang['Scale thumbnails'] = 'Skaler miniaturebilleder';
+$lang['Thumbnails max height'] = 'Miniaturebilleders maksimale højde';
 ?>
