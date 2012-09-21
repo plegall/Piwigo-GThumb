@@ -12,12 +12,39 @@
 
 #thumbnails .gthumb a {
   position: absolute;
+  z-index:0;
 }
 
-#thumbnails .gthumb img.thumbnail,
-#thumbnails .gthumb img.thumbnail:hover {
+#thumbnails .gthumb a img.thumbnail,
+#thumbnails .gthumb a img.thumbnail:hover {
   border: 0 none;
   margin: 0;
   padding: 0;
   top: 0;
+}
+
+#thumbnails .thumbLegend {
+  display:none;
+  position:absolute;
+  z-index:100;
+  top:50%;
+  margin-top:-20px;
+  height:30px;
+  padding:5px 0;
+  width:100%;
+  background:rgba(0,0,0,0.7);
+  text-align:center;
+  vertical-align:middle;
+  overflow:hidden;
+  box-shadow:0 0 3px rgb(0,0,0);
+  color:aaa;
+}
+  #thumbnails .gthumb:hover .thumbLegend {
+    display:block;
+  }
+#thumbnails .thumbLegend .thumbName {
+  display:block;
+  vertical-align:middle;
+  font-weight:bold;
+  color:#eee;
 }

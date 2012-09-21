@@ -13,5 +13,6 @@ $lang['Cache have been generated'] = 'Cache have been generated';
 $lang['Pre-cache thumbnails'] = 'Pre-cache thumbnails';
 $lang['Delete images in GThumb+ cache.'] = 'Delete images in GThumb+ cache.';
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Finds images that have not been cached and creates the cached version.';
+$lang['Show thumbnails caption'] = 'Show thumbnails caption';
 
 ?>

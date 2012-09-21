@@ -7,6 +7,7 @@ $config_default = array(
   'big_thumb'       => true,
   'cache_big_thumb' => true,
   'method'          => 'crop',
+  'show_thumbnail_caption' => true,
 );
 
 ?>

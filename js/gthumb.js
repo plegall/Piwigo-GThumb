@@ -36,7 +36,7 @@ var GThumb = {
     var line = 1;
     var round_rest = 0;
     var main_width = jQuery('#thumbnails').width();
-    var first_thumb = jQuery('#thumbnails img:first');
+    var first_thumb = jQuery('#thumbnails img.thumbnail:first');
     var best_size = {width:1,height:1};
 
     if (GThumb.big_thumb != null && GThumb.big_thumb.height < main_width * GThumb.max_first_thumb_width) {

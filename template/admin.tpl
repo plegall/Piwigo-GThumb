@@ -24,22 +24,29 @@
 
   <tr>
     <td align="right">{'Double the size of the first thumbnail'|@translate} : &nbsp;&nbsp;</td>
-    <td><input type="radio" name="big_thumb" value="1" {if $BIG_THUMB}checked="checked"{/if}> {'Yes'|@translate} &nbsp;
-        <input type="radio" name="big_thumb" value="0" {if !$BIG_THUMB}checked="checked"{/if}> {'No'|@translate}
+    <td><label><input type="radio" name="big_thumb" value="1" {if $BIG_THUMB}checked="checked"{/if}> {'Yes'|@translate}</label> &nbsp;
+        <label><input type="radio" name="big_thumb" value="0" {if !$BIG_THUMB}checked="checked"{/if}> {'No'|@translate}</label>
     </td>
   </tr>
 
   <tr>
     <td align="right">{'Cache the big thumbnails (recommended)'|@translate} : &nbsp;&nbsp;</td>
-    <td><input type="radio" name="cache_big_thumb" value="1" {if $CACHE_BIG_THUMB}checked="checked"{/if}> {'Yes'|@translate} &nbsp;
-        <input type="radio" name="cache_big_thumb" value="0" {if !$CACHE_BIG_THUMB}checked="checked"{/if}> {'No'|@translate}
+    <td><label><input type="radio" name="cache_big_thumb" value="1" {if $CACHE_BIG_THUMB}checked="checked"{/if}> {'Yes'|@translate}</label> &nbsp;
+        <label><input type="radio" name="cache_big_thumb" value="0" {if !$CACHE_BIG_THUMB}checked="checked"{/if}> {'No'|@translate}</label>
     </td>
   </tr>
 
   <tr>
     <td align="right">{'Scale thumbnails'|@translate} : &nbsp;&nbsp;</td>
-    <td><input type="radio" name="method" value="crop" {if $METHOD == 'crop'}checked="checked"{/if}> {'Crop'|@translate} &nbsp;
-        <input type="radio" name="method" value="resize" {if $METHOD == 'resize'}checked="checked"{/if}> {'Resize'|@translate}
+    <td><label><input type="radio" name="method" value="crop" {if $METHOD == 'crop'}checked="checked"{/if}> {'Crop'|@translate}</label> &nbsp;
+        <label><input type="radio" name="method" value="resize" {if $METHOD == 'resize'}checked="checked"{/if}> {'Resize'|@translate}</label>
+    </td>
+  </tr>
+  
+  <tr>
+    <td align="right">{'Show thumbnails caption'|@translate} : &nbsp;&nbsp;</td>
+    <td><label><input type="radio" name="show_thumbnail_caption" value="1" {if $SHOW_THUMBNAIL_CAPTION}checked="checked"{/if}> {'Yes'|@translate}</label> &nbsp;
+        <label><input type="radio" name="show_thumbnail_caption" value="0" {if !$SHOW_THUMBNAIL_CAPTION}checked="checked"{/if}> {'No'|@translate}</label>
     </td>
   </tr>
 

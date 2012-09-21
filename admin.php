@@ -103,6 +103,7 @@ if (isset($_POST['submit']))
     'big_thumb'       => !empty($_POST['big_thumb']),
     'cache_big_thumb' => !empty($_POST['cache_big_thumb']),
     'method'          => $_POST['method'],
+    'show_thumbnail_caption' => !empty($_POST['show_thumbnail_caption']),
   );
 
   if (!is_numeric($params['height']))
@@ -149,6 +150,7 @@ $template->assign(
     'BIG_THUMB'       => $params['big_thumb'],
     'CACHE_BIG_THUMB' => $params['cache_big_thumb'],
     'METHOD'          => $params['method'],
+    'SHOW_THUMBNAIL_CAPTION' => $params['show_thumbnail_caption'],
     'PWG_TOKEN'       => get_pwg_token(),
   )
 );
