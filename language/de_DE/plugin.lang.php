@@ -15,4 +15,5 @@ $lang['Pre-cache thumbnails'] = 'Pre-cache Thumbnails';
 $lang['Purge thumbnails cache'] = 'Thumbnails-Zwischenspeicher leeren';
 $lang['Scale thumbnails'] = 'Thumbnails skalieren';
 $lang['Thumbnails max height'] = 'Maximal Höhe der Thumbnails';
+$lang['Show thumbnails caption'] = 'Zeige Beschreibung der Thumbnails';
 ?>
