@@ -14,4 +14,5 @@ $lang['Pre-cache thumbnails'] = 'Pre-cache μικρογραφίες';
 $lang['Delete images in GThumb+ cache.'] = 'Διαγραφή εικόνων στο GThumb+ cache.';
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Εύρεση εικόνων που δεν έχουν γίνει cach και δημιουργία έκσοδης cache'; 
 
+$lang['Show thumbnails caption'] = 'Εμφάνιση λεζάντας μικρογραφιών ';
 ?>
