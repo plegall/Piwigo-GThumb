@@ -33,4 +33,5 @@ $lang['Pre-cache thumbnails'] = 'Pul resimlerini önbelleğe al';
 $lang['Purge thumbnails cache'] = 'Pul resimleri önbelleğini temizle';
 $lang['Scale thumbnails'] = 'Pul resimlerini boyutlandır';
 $lang['Thumbnails max height'] = 'Pul resimleri maks. yüksekliği';
+$lang['Show thumbnails caption'] = 'Küçük resim (thumbnail) başlığını göster';
 ?>
