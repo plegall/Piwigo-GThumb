@@ -14,4 +14,5 @@ $lang['Pre-cache thumbnails'] = 'Predvytvorenie vyrovnávacej pamäti náhľadov
 $lang['Delete images in GThumb+ cache.'] = 'Vymazanie fotiek v GThumb+ vyrovnávacej pamäti.';
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Vyhľadanie fotiek, ktoré nie sú vo vyrovnávacej pamäti a vytvorenie ich verzie.';
 
+$lang['Show thumbnails caption'] = 'Zobraziť názov náhľadov';
 ?>
