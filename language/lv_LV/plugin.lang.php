@@ -14,4 +14,5 @@ $lang['Pre-cache thumbnails'] = 'Kešot sīkbildes';
 $lang['Delete images in GThumb+ cache.'] = 'Dzēst attēlus iekš GThumb+ cache.';
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Atrod attēlos, kas vēl nav kešoti un izveido kešotu versiju.';
 
+$lang['Show thumbnails caption'] = 'Parādīt sagūstīto sīkbildi';
 ?>
