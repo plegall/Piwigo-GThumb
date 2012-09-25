@@ -33,4 +33,5 @@ $lang['Cache have been generated'] = 'Кеш був згенерований';
 $lang['Pre-cache thumbnails'] = 'Попередньо кешувати ескізи';
 $lang['Delete images in GThumb+ cache.'] = 'Видалити зображення в GThumb+ кеші.';
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Пошук зображень, яких немає в кеші, і створення версії в кеші.';
+$lang['Show thumbnails caption'] = 'Показувати підпис мініатюр';
 ?>
