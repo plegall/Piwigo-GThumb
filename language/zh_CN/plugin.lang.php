@@ -14,4 +14,5 @@ $lang['Pre-cache thumbnails'] = '预缓存缩略图';
 $lang['Delete images in GThumb+ cache.'] = '删除GThumb+缓存中的图片.';
 $lang['Finds images that have not been cached and creates the cached version.'] = '某些图片无法被缓存并创建缓存版本.';
 
+$lang['Show thumbnails caption'] = '显示缩略图标题';
 ?>
