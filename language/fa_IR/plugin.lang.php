@@ -33,4 +33,5 @@ $lang['Pre-cache thumbnails'] = 'بررسی پیش از کش کردن عکس ر�
 $lang['Purge thumbnails cache'] = 'تخلیه کردن کش عکس ریزه ها';
 $lang['Scale thumbnails'] = 'بزرگنمایی عکس ریزه ها';
 $lang['Thumbnails max height'] = 'بیشترین بلندای عکس ریزه ها';
+$lang['Show thumbnails caption'] = 'نمایش عنوان کوچک عکس ها';
 ?>
