@@ -22,15 +22,16 @@
 // +-----------------------------------------------------------------------+
 $lang['%d file'] = '%d arxiu';
 $lang['%d files'] = '%d arxius';
-$lang['Cache Informations'] = 'Informació de memòria cau';
-$lang['Cache have been generated'] = 'La memòria cau ha sigut generada';
-$lang['Cache the big thumbnails (recommended)'] = 'Emmagatzemar en memòria cau les miniatures grans (recomanat)';
-$lang['Delete images in GThumb+ cache.'] = 'Eliminar les imatges a GThumb i a la memòria cau';
-$lang['Double the size of the first thumbnail'] = 'Doblar la mida de la primera miniatura';
-$lang['Finds images that have not been cached and creates the cached version.'] = 'Trobar imatges que no s\'han emmagatzemat a la memòria cau i crear la versió en memòria cau.';
-$lang['Margin between thumbnails'] = 'Marge entre les miniatures';
+$lang['Cache Informations'] = 'Informació de la memòria cau';
+$lang['Cache have been generated'] = 'S\'ha generat la memòria cau';
+$lang['Cache the big thumbnails (recommended)'] = 'Emmagatzema a la memòria cau les miniatures grans (recomanat)';
+$lang['Delete images in GThumb+ cache.'] = 'Elimina les imatges de la memòria cau de GThumb+';
+$lang['Double the size of the first thumbnail'] = 'Duplica la mida de la primera miniatura';
+$lang['Finds images that have not been cached and creates the cached version.'] = 'Busca imatges que no s\'han emmagatzemat a la memòria cau i crea la versió per a la memòria cau.';
+$lang['Margin between thumbnails'] = 'Marge entre miniatures';
 $lang['Pre-cache thumbnails'] = 'Miniatures en pre-memoria cau';
-$lang['Purge thumbnails cache'] = 'Buidar memòria cau de miniatures';
-$lang['Scale thumbnails'] = 'Escalar miniatures';
+$lang['Purge thumbnails cache'] = 'Buida la memòria cau de les miniatures';
+$lang['Scale thumbnails'] = 'Escala miniatures';
 $lang['Thumbnails max height'] = 'Alçada màxima de les miniatures';
+$lang['Show thumbnails caption'] = 'Mostra el títol de les miniatures';
 ?>
