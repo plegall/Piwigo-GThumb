@@ -33,4 +33,5 @@ $lang['Pre-cache thumbnails'] = 'Colocar miniaturas em Pré-cache';
 $lang['Purge thumbnails cache'] = 'Purgar miniaturas da cache';
 $lang['Scale thumbnails'] = 'Ordenar miniaturas';
 $lang['Thumbnails max height'] = 'Altura máxima das miniaturas';
+$lang['Show thumbnails caption'] = 'Mostrar as lendas das miniaturas';
 ?>
