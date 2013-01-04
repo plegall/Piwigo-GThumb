@@ -33,4 +33,5 @@ $lang['Pre-cache thumbnails'] = 'Voorskep duimnaels';
 $lang['Purge thumbnails cache'] = 'Maak duimnael spoedkas leeg';
 $lang['Scale thumbnails'] = 'Skaal duimnaels';
 $lang['Thumbnails max height'] = 'Duimnaels maksimum hoogte';
+$lang['Show thumbnails caption'] = 'Wys duimnaels se byskrif';
 ?>
