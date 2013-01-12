@@ -2,27 +2,27 @@
 {foreach from=$thumbnails item=thumbnail}
 {assign var=derivative value=$pwg->derivative($GThumb_derivative_params, $thumbnail.src_image)}
 <li class="gthumb">
+  <a href="{$thumbnail.URL}">
   {if $SHOW_THUMBNAIL_CAPTION }
-  <span class="thumbLegend">
-    <span class="thumbName">
-      {$thumbnail.NAME}
-      {if !empty($thumbnail.icon_ts)}
-      <img title="{$thumbnail.icon_ts.TITLE}" src="{$ROOT_URL}{$themeconf.icon_dir}/recent.png" alt="(!)">
+    <span class="thumbLegend">
+      <span class="thumbName">
+        {$thumbnail.NAME}
+        {if !empty($thumbnail.icon_ts)}
+        <img title="{$thumbnail.icon_ts.TITLE}" src="{$ROOT_URL}{$themeconf.icon_dir}/recent.png" alt="(!)">
+        {/if}
+      </span>
+      {if isset($thumbnail.NB_COMMENTS)}
+      <span class="{if 0==$thumbnail.NB_COMMENTS}zero {/if}nb-comments">
+        {$pwg->l10n_dec('%d comment', '%d comments',$thumbnail.NB_COMMENTS)}
+      </span>
+      {/if}
+      {if isset($thumbnail.NB_HITS)}
+      <span class="{if 0==$thumbnail.NB_HITS}zero {/if}nb-hits">
+        {$pwg->l10n_dec('%d hit', '%d hits',$thumbnail.NB_HITS)}
+      </span>
       {/if}
     </span>
-    {if isset($thumbnail.NB_COMMENTS)}
-    <span class="{if 0==$thumbnail.NB_COMMENTS}zero {/if}nb-comments">
-      {$pwg->l10n_dec('%d comment', '%d comments',$thumbnail.NB_COMMENTS)}
-    </span>
-    {/if}
-    {if isset($thumbnail.NB_HITS)}
-    <span class="{if 0==$thumbnail.NB_HITS}zero {/if}nb-hits">
-      {$pwg->l10n_dec('%d hit', '%d hits',$thumbnail.NB_HITS)}
-    </span>
-    {/if}
-  </span>
   {/if}
-  <a href="{$thumbnail.URL}">
     <img class="thumbnail" {if !$derivative->is_cached()}data-{/if}src="{$derivative->get_url()}" alt="{$thumbnail.TN_ALT}" title="{$thumbnail.TN_TITLE}" {$derivative->get_size_htm()}>
   </a>
 </li>
