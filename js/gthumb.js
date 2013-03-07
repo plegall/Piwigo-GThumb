@@ -23,7 +23,7 @@ var GThumb = {
     });
 
     first = GThumb.t[0];
-    GThumb.small_thumb = {index:first.index,width:first.real_width,height:first.real_height,src:jQuery('#thumbnails img:first').attr('src')}
+    GThumb.small_thumb = {index:first.index,width:first.real_width,height:first.real_height,src:jQuery('#thumbnails img.thumbnail:first').attr('src')}
 
     jQuery.resize.throttleWindow = false;
     jQuery.resize.delay = 50;
