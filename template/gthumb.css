@@ -23,28 +23,29 @@
   top: 0;
 }
 
-#thumbnails .thumbLegend {
-  display:none;
+#thumbnails .gthumb .thumbLegend {
   position:absolute;
   z-index:100;
-  top:50%;
-  margin-top:-20px;
+  bottom:-40px;
+  top:auto;
   height:30px;
   padding:5px 0;
   width:100%;
   background:rgba(0,0,0,0.7);
   text-align:center;
-  vertical-align:middle;
   overflow:hidden;
-  box-shadow:0 0 3px rgb(0,0,0);
-  color:aaa;
+  color:#aaa;
+  -webkit-transition:all 200ms ease-out;
+  -moz-transition:all 200ms ease-out;
+  -ms-transition:all 200ms ease-out;
+  -o-transition:all 200ms ease-out;
+  transition:all 200ms ease-out;
 }
   #thumbnails .gthumb:hover .thumbLegend {
-    display:block;
+    bottom:0px;
   }
 #thumbnails .thumbLegend .thumbName {
   display:block;
-  vertical-align:middle;
   font-weight:bold;
   color:#eee;
 }
