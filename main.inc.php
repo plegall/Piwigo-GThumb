@@ -25,13 +25,14 @@ if (isset($_GET['rvts']))
   add_event_handler('loc_end_index_thumbnails', 'process_GThumb', 50, 2);
 }
 
-add_event_handler('loc_begin_index', 'GThumb_init', 60);
+add_event_handler('init', 'GThumb_init');
+add_event_handler('loc_begin_index', 'GThumb_index', 60);
 add_event_handler('loc_end_index', 'GThumb_remove_thumb_size');
 add_event_handler('get_admin_plugin_menu_links', 'GThumb_admin_menu');
 
 function GThumb_init()
 {
-  global $conf, $user, $page, $template;
+  global $conf, $user, $page;
   
   // new param in 2.4.c
   if (!isset($conf['GThumb']['show_thumbnail_caption']))
@@ -39,15 +40,19 @@ function GThumb_init()
     $conf['GThumb']['show_thumbnail_caption'] = true;
     conf_update_param('GThumb', serialize($conf['GThumb']));
   }
-  
-
-  $template->set_prefilter('index', 'GThumb_prefilter');
-
-  add_event_handler('loc_end_index_thumbnails', 'process_GThumb', 50, 2);
 
   $user['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $page['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $conf['show_thumbnail_caption'] = $conf['GThumb']['show_thumbnail_caption'];
+}
+
+function GThumb_index()
+{
+  global $template;
+  
+  $template->set_prefilter('index', 'GThumb_prefilter');
+
+  add_event_handler('loc_end_index_thumbnails', 'process_GThumb', 50, 2);
 }
 
 function process_GThumb($tpl_vars, $pictures)
