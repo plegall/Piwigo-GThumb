@@ -101,9 +101,9 @@
 </style>
 {/literal}{/html_head}
 
-{combine_script id='iloader' load='footer' path='themes/default/js/image.loader.js'}
+{combine_script id='iloader' load='footer' path='plugins/GThumb/js/image.loader.js'}
 
-{footer_script require='jquery.effects.slide'}{literal}
+{footer_script require='jquery.ui.effect-slide'}{literal}
 jQuery('input[name^="cache"]').tipTip({'delay' : 0, 'fadeIn' : 200, 'fadeOut' : 200});
 
 var loader = new ImageLoader( {onChanged: loaderChanged, maxRequests:1 } )
