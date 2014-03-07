@@ -32,7 +32,7 @@ add_event_handler('get_admin_plugin_menu_links', 'GThumb_admin_menu');
 
 function GThumb_init()
 {
-  global $conf, $user, $page;
+  global $conf, $user, $page, $stripped;
   
   // new param in 2.4.c
   if (!isset($conf['GThumb']['show_thumbnail_caption']))
@@ -43,6 +43,7 @@ function GThumb_init()
 
   $user['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $page['nb_image_page'] = $conf['GThumb']['nb_image_page'];
+  $stripped['maxThumb'] = $conf['GThumb']['nb_image_page'];
   $conf['show_thumbnail_caption'] = $conf['GThumb']['show_thumbnail_caption'];
 }
 
