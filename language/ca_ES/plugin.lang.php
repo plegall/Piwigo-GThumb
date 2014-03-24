@@ -20,8 +20,8 @@
 // | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, |
 // | USA.                                                                  |
 // +-----------------------------------------------------------------------+
-$lang['%d file'] = '%d arxiu';
-$lang['%d files'] = '%d arxius';
+$lang['%d file'] = '%d fitxer';
+$lang['%d files'] = '%d fitxers';
 $lang['Cache Informations'] = 'Informació de la memòria cau';
 $lang['Cache have been generated'] = 'S\'ha generat la memòria cau';
 $lang['Cache the big thumbnails (recommended)'] = 'Emmagatzema a la memòria cau les miniatures grans (recomanat)';
@@ -34,4 +34,3 @@ $lang['Purge thumbnails cache'] = 'Buida la memòria cau de les miniatures';
 $lang['Scale thumbnails'] = 'Escala miniatures';
 $lang['Thumbnails max height'] = 'Alçada màxima de les miniatures';
 $lang['Show thumbnails caption'] = 'Mostra el títol de les miniatures';
-?>
