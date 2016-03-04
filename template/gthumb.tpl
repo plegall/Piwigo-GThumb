@@ -21,6 +21,12 @@
         {$pwg->l10n_dec('%d hit', '%d hits',$thumbnail.NB_HITS)}
       </span>
       {/if}
+      {if isset($thumbnail.rating_score) and $GThumb.show_score_in_caption}
+        {if isset($thumbnail.NB_COMMENTS) or isset($thumbnail.NB_HITS)} - {/if}
+      <span class="nb-hits">
+        {'Rating score'|@translate} {$thumbnail.rating_score}
+      </span>
+      {/if}
     </span>
   {/if}
   <a href="{$thumbnail.URL}">

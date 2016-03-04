@@ -8,6 +8,7 @@ $config_default = array(
   'cache_big_thumb' => true,
   'method'          => 'crop',
   'show_thumbnail_caption' => true,
+  'show_score_in_caption' => false,
 );
 
 ?>

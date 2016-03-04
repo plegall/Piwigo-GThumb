@@ -41,6 +41,13 @@ function GThumb_init()
     conf_update_param('GThumb', serialize($conf['GThumb']));
   }
 
+  // new param in 2.8.a
+  if (!isset($conf['GThumb']['show_score_in_caption']))
+  {
+    $conf['GThumb']['show_score_in_caption'] = false;
+    conf_update_param('GThumb', serialize($conf['GThumb']));
+  }
+
   $user['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $page['nb_image_page'] = $conf['GThumb']['nb_image_page'];
   $stripped['maxThumb'] = $conf['GThumb']['nb_image_page'];

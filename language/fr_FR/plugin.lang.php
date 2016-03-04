@@ -14,5 +14,5 @@ $lang['Pre-cache thumbnails'] = 'Mettre en cache les miniatures';
 $lang['Delete images in GThumb+ cache.'] = 'Efface les images du cache de GThumb+.';
 $lang['Finds images that have not been cached and creates the cached version.'] = "Met en cache les images qui n'ont pas encore été crées.";
 $lang['Show thumbnails caption'] = 'Afficher les légendes des miniatures';
-
+$lang['Show rating score in caption'] = 'Montrer le score dans la légende';
 ?>

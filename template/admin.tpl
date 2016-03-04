@@ -50,6 +50,13 @@
     </td>
   </tr>
 
+  <tr>
+    <td align="right">{'Show rating score in caption'|@translate} : &nbsp;&nbsp;</td>
+    <td><label><input type="radio" name="show_score_in_caption" value="1" {if $SHOW_SCORE_IN_CAPTION}checked="checked"{/if}> {'Yes'|@translate}</label> &nbsp;
+        <label><input type="radio" name="show_score_in_caption" value="0" {if !$SHOW_SCORE_IN_CAPTION}checked="checked"{/if}> {'No'|@translate}</label>
+    </td>
+  </tr>
+
 </table>
 </fieldset>
 
