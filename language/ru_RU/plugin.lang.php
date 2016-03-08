@@ -15,4 +15,4 @@ $lang['Delete images in GThumb+ cache.'] = 'Удалить фотографии 
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Найти фотографии, которые не были кэшированы и провести кэширование для них.';
 
 $lang['Show thumbnails caption'] = 'Показать легенду';
-?>
+$lang['Show rating score in caption'] = 'Показ оценочных баллов в заголовке';
