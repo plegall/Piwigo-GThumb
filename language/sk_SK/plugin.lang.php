@@ -15,4 +15,4 @@ $lang['Delete images in GThumb+ cache.'] = 'Vymazanie fotiek v GThumb+ vyrovnáv
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Vyhľadanie fotiek, ktoré nie sú vo vyrovnávacej pamäti a vytvorenie ich verzie.';
 
 $lang['Show thumbnails caption'] = 'Zobraziť názov náhľadov';
-?>
+$lang['Show rating score in caption'] = 'Ukázať hodnotiace skóre v titulku';
