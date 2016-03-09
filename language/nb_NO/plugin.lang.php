@@ -34,4 +34,4 @@ $lang['Purge thumbnails cache'] = 'Slett miniatyrbildemellomlager';
 $lang['Scale thumbnails'] = 'Skaler miniatyrbilder';
 $lang['Thumbnails max height'] = 'Max høyde miniatyrbilder';
 $lang['Show thumbnails caption'] = 'Vis miniatyrbilder';
-?>
+$lang['Show rating score in caption'] = 'Vis score i bildetekst';
