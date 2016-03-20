@@ -15,4 +15,4 @@ $lang['Delete images in GThumb+ cache.'] = 'Verwijder de afbeeldingen in de GThu
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Zoekt de afbeeldingen die nog niet in de cache zijn opgenomen en creëert versies voor de cache.';
 
 $lang['Show thumbnails caption'] = 'Toon thumbnails onderschrift';
-?>
+$lang['Show rating score in caption'] = 'Toon waardering score in bijschrift';
