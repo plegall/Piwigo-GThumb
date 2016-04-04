@@ -15,4 +15,4 @@ $lang['Delete images in GThumb+ cache.'] = 'Διαγραφή εικόνων στ
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Εύρεση εικόνων που δεν έχουν γίνει cach και δημιουργία έκσοδης cache'; 
 
 $lang['Show thumbnails caption'] = 'Εμφάνιση λεζάντας μικρογραφιών ';
-?>
+$lang['Show rating score in caption'] = 'Εμφάνιση βαθμολογίας αξιολόγησης στη λεζάντα';
