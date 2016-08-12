@@ -34,4 +34,4 @@ $lang['Scale thumbnails'] = 'Мащаб на миниатюрите';
 $lang['Purge thumbnails cache'] = 'Почистване на кеша с миниатюри';
 $lang['Pre-cache thumbnails'] = 'Презареждане на миниатюрите';
 $lang['Show thumbnails caption'] = 'Показване надписа на миниатюрите';
-?>
+$lang['Show rating score in caption'] = 'Показвай оценката в надписа';
