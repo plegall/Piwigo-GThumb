@@ -34,4 +34,4 @@ $lang['Purge thumbnails cache'] = 'Maak duimnael spoedkas leeg';
 $lang['Scale thumbnails'] = 'Skaal duimnaels';
 $lang['Thumbnails max height'] = 'Duimnaels maksimum hoogte';
 $lang['Show thumbnails caption'] = 'Wys duimnaels se byskrif';
-?>
+$lang['Show rating score in caption'] = 'Wys graderingspunt in byskrif';
