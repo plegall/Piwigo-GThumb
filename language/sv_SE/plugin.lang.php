@@ -22,16 +22,16 @@
 // +-----------------------------------------------------------------------+
 $lang['%d file'] = '%d fil';
 $lang['%d files'] = '%d filer';
-$lang['Cache Informations'] = 'Cache Information';
+$lang['Cache Informations'] = 'Cacha information';
 $lang['Cache have been generated'] = 'Cache har skapats';
-$lang['Cache the big thumbnails (recommended)'] = 'Cacha stora thumbnails (rekommenderas)';
-$lang['Delete images in GThumb+ cache.'] = 'Ta bort bilder i GThumb+ cache.';
-$lang['Double the size of the first thumbnail'] = 'Fördubbla storleken på första  thumbnailsen';
-$lang['Finds images that have not been cached and creates the cached version.'] = 'Hittar bilder som inte blivit cachade och skapar cachad version';
-$lang['Margin between thumbnails'] = 'Matginal mellan thumbnails';
-$lang['Pre-cache thumbnails'] = 'För-cacha thumbnails';
-$lang['Purge thumbnails cache'] = 'Rensa thumbnails cache';
-$lang['Scale thumbnails'] = 'Skala thumbnails';
-$lang['Show thumbnails caption'] = 'Visa filnamn på thumbnail';
-$lang['Thumbnails max height'] = 'Thumbnails max höjd';
-?>
+$lang['Cache the big thumbnails (recommended)'] = 'Cacha stora tumnaglar (rekommenderas)';
+$lang['Delete images in GThumb+ cache.'] = 'Ta bort bilder i GThumb+-cache.';
+$lang['Double the size of the first thumbnail'] = 'Fördubbla storleken på första tumnageln';
+$lang['Finds images that have not been cached and creates the cached version.'] = 'Hittar bilder som inte blivit cachade och skapar en cachad version';
+$lang['Margin between thumbnails'] = 'Marginal mellan tumnaglar';
+$lang['Pre-cache thumbnails'] = 'För-cacha tumnaglar';
+$lang['Purge thumbnails cache'] = 'Rensa tumnagel-cachen';
+$lang['Scale thumbnails'] = 'Skala tumnaglar';
+$lang['Show thumbnails caption'] = 'Visa filnamn på tumnagel';
+$lang['Thumbnails max height'] = 'Tumnagelns maximala höjd';
+$lang['Show rating score in caption'] = 'Visa betyg i titeln';
