@@ -34,4 +34,4 @@ $lang['Purge thumbnails cache'] = 'Borrar memoria caché de miniaturas';
 $lang['Scale thumbnails'] = 'Escalar miniaturas';
 $lang['Thumbnails max height'] = 'Altura máxima de miniaturas';
 $lang['Show thumbnails caption'] = 'Mostrar los titulos de las miniaturas';
-?>
+$lang['Show rating score in caption'] = 'Mostrar calificación en el subtítulo';
