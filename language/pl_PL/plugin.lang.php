@@ -15,4 +15,4 @@ $lang['Delete images in GThumb+ cache.'] = 'Usuń zdjęcia z pamięci podręczne
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Znajduje zdjęcia, które nie zostały umieszczone w pamięci podręcznej i tworzy tam ich kopie.';
 
 $lang['Show thumbnails caption'] = 'Pokaż etykiety miniaturek';
-?>
+$lang['Show rating score in caption'] = 'Pokaż wynik oceny w podpisie';
