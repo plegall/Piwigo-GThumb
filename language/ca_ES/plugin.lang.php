@@ -34,3 +34,4 @@ $lang['Purge thumbnails cache'] = 'Buida la memòria cau de les miniatures';
 $lang['Scale thumbnails'] = 'Escala miniatures';
 $lang['Thumbnails max height'] = 'Alçada màxima de les miniatures';
 $lang['Show thumbnails caption'] = 'Mostra el títol de les miniatures';
+$lang['Show rating score in caption'] = 'Mostra la puntuació de la valoració a la llegenda';
