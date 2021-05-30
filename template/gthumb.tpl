@@ -58,8 +58,6 @@ jQuery('#thumbnails').resize(GThumb.process);
 
 {html_head}
 <style type="text/css">#thumbnails .gthumb {ldelim} margin:0 0 {$GThumb.margin}px {$GThumb.margin}px !important; }</style>
-<!--[if IE 8]>
-<style type="text/css">#thumbnails .gthumb a {ldelim} right: 0px; }</style>
-<![endif]-->
+
 {/html_head}
 {/if}
