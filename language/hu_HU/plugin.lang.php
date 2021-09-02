@@ -34,4 +34,4 @@ $lang['Pre-cache thumbnails'] = 'Bélyegképek előretárolása';
 $lang['Delete images in GThumb+ cache.'] = 'Képek törlése a GThumb+ cache.-ban';
 $lang['Finds images that have not been cached and creates the cached version.'] = 'Nem tárolt képek keresése és tároló verzió létrehozása';
 $lang['Show thumbnails caption'] = 'Bélyegképek felirat megjelenítése';
-?>
+$lang['Show rating score in caption'] = 'Értékelés mutatása a címben';
