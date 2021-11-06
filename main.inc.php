@@ -6,6 +6,7 @@ Description: Display thumbnails as patchwork
 Plugin URI: auto
 Author: P@t
 Author URI: http://www.gauchon.com
+Has Settings: true
 */
 
 global $conf;
@@ -81,7 +82,7 @@ function process_GThumb($tpl_vars, $pictures)
   return $tpl_vars;
 }
 
-function GThumb_prefilter($content, $smarty)
+function GThumb_prefilter($content)
 {
   $pattern = '#\<div.*?id\="thumbnails".*?\>\{\$THUMBNAILS\}\</div\>#';
   $replacement = '<ul id="thumbnails">{$THUMBNAILS}</ul>';
