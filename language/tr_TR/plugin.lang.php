@@ -34,4 +34,4 @@ $lang['Purge thumbnails cache'] = 'Pul resimleri önbelleğini temizle';
 $lang['Scale thumbnails'] = 'Pul resimlerini boyutlandır';
 $lang['Thumbnails max height'] = 'Pul resimleri maks. yüksekliği';
 $lang['Show thumbnails caption'] = 'Küçük resim (thumbnail) başlığını göster';
-?>
+$lang['Show rating score in caption'] = 'Derecelendirme puanını altyazıda göster';
