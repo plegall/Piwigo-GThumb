@@ -15,4 +15,4 @@ $lang['Delete images in GThumb+ cache.'] = '刪除在gthumb+緩存的圖像';
 $lang['Finds images that have not been cached and creates the cached version.'] = '尋找沒有被緩存的圖像，並創建緩存的版本'; 
 $lang['Show thumbnails caption'] = '顯示縮圖標題'; 
 
-?>
+$lang['Show rating score in caption'] = '在標題中顯示評分';
