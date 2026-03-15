@@ -71,11 +71,11 @@ function process_GThumb($tpl_vars, $pictures)
   $template->set_filename( 'index_thumbnails', realpath(GTHUMB_PATH.'template/gthumb.tpl'));
   $template->assign('GThumb', $conf['GThumb']);
 
-  $template->assign('GThumb_derivative_params', ImageStdParams::get_custom(9999, $conf['GThumb']['height']));
+  $template->assign('GThumb_derivative_params', ImageStdParams::get_custom(9989, $conf['GThumb']['height']));
 
   if ($conf['GThumb']['big_thumb'] and !empty($tpl_vars[0]))
   {
-    $derivative_params = ImageStdParams::get_custom(9999, 2 * $conf['GThumb']['height'] + $conf['GThumb']['margin']);
+    $derivative_params = ImageStdParams::get_custom(9989, 2 * $conf['GThumb']['height'] + $conf['GThumb']['margin']);
     $template->assign('GThumb_big', new DerivativeImage($derivative_params, $tpl_vars[0]['src_image']));
   }
 

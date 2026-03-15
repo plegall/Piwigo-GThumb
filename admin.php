@@ -4,7 +4,7 @@ if (!defined('PHPWG_ROOT_PATH')) die('Hacking attempt!');
 
 function delete_gthumb_cache($height)
 {
-  $pattern = '#.*-cu_s9999x'.$height.'\.[a-zA-Z0-9]{3,4}$#';
+  $pattern = '#.*-cu_s9989x'.$height.'\.[a-zA-Z0-9]{3,4}$#';
   if ($contents = @opendir(PHPWG_ROOT_PATH.PWG_DERIVATIVE_DIR))
   {
     while (($node = readdir($contents)) !== false)
